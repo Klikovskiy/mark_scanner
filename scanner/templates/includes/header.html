@@ -1,0 +1,23 @@
+{% load static %}
+
+<header class="header">
+    <div class="header__container">
+        <a href="#" class="header__logo">
+            <img src="{% static 'img/logo.png' %}" alt="logo">
+        </a>
+        <div class="header__right">
+            <nav class="header__menu menu">
+                <a href="/" class="menu__link active">Главная</a>
+                <a href="#" class="menu__link">Статьи</a>
+                {% if user.id_authenticated %}
+                    <a href="{% url 'scanner_auth:login' %}"  class="menu__link">Вход</a>
+                {% else %}
+                    <a href="{% url 'scanner_auth:logout' %}"  class="menu__link">Выход</a>
+                {% endif %}
+            </nav>
+            <div class="header__burger burger">
+                <span></span>
+            </div>
+        </div>
+    </div>
+</header>

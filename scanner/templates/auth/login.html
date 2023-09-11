@@ -1,0 +1,47 @@
+{% extends 'base_templates.html' %}
+
+{% load static %}
+
+{% block meta %}
+    <title>Marketing Scanner - Вход</title>
+    <meta name="Keywords" content="ключевые слова слова">
+    <meta name="description" content="описание для бота">
+{% endblock %}
+
+{% block content %}
+    <div class="main__container">
+        <form method="post"
+              action="{% url 'scanner_auth:login' %}"
+              class="main__form form">
+            {% csrf_token %}
+            <h2 class="form__title">
+                Войти
+            </h2>
+            <div class="form__subtitle">
+                <a href="{% url 'scanner_auth:signup' %}">
+                    или Зарегистрироваться</a>
+            </div>
+            <div class="form__inputs">
+                <label class="form__input">
+                    Почта:<br>
+                    {{ form.username }}
+                </label>
+                {% if form.username.errors %}
+                    {{ form.username.errors }}
+                {% endif %}
+                <label class="form__input">
+                    Пароль:<br>
+                    {{ form.password }}
+                </label>
+                {% if form.password %}
+                    {{ form.password.errors }}
+                {% endif %}
+            </div>
+            <button type="submit" class="form__button">
+                Войти
+            </button>
+            <a href="{% url 'scanner_auth:reset_password' %}"
+               class="form__link">Забыли пароль?</a>
+        </form>
+    </div>
+{% endblock %}

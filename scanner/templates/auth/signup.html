@@ -1,0 +1,54 @@
+{% extends 'base_templates.html' %}
+
+{% load static %}
+
+{% block meta %}
+<title>Marketing Scanner - Регистрация</title>
+<meta name="Keywords" content="ключевые слова слова">
+<meta name="description" content="описание для бота">
+{% endblock %}
+
+{% block content %}
+
+<div class="main__container">
+    <form method="post" action="{% url 'scanner_auth:signup' %}"
+          class="main__form form">
+        {% csrf_token %}
+        <h2 class="form__title">
+            Регистрация
+        </h2>
+        <div class="form__inputs">
+            <label class="form__input">
+                Почта:<br>
+                {{ form.email }}
+            </label>
+            {% if form.email.errors %}
+                {{ form.email.errors }}
+            {% endif %}
+
+            <label class="form__input">
+                Пароль:<br>
+                {{ form.password1 }}
+            </label>
+            {% if form.password1 %}
+                {{ form.password1.errors }}
+            {% endif %}
+            <label class="form__input">
+                Повтор пароля:<br>
+                {{ form.password2 }}
+            </label>
+            {% if form.password2 %}
+                {{ form.password2.errors }}
+            {% endif %}
+        </div>
+        <div class="form__agree">
+            {{ form.user_public_contract }}
+            Согласен с <a href="#">пользовательским соглашением</a>
+        </div>
+        <button type="submit" class="form__button">
+            Зарегистрироваться
+        </button>
+        <a href="{% url 'scanner_auth:login' %}" class="form__link">Уже есть аккаунт?</a>
+    </form>
+</div>
+{% endblock content %}
